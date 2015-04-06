@@ -22,7 +22,7 @@
 
 #define _DEFAULT_SOURCE
 #define _SVID_SOURCE // needed for MAP_ANONYMOUS
-#define _DARWIN_C_SOURCE // needed for MAP_ANON
+//#define _DARWIN_C_SOURCE // needed for MAP_ANON
 #include <inttypes.h>
 #include <math.h>
 #include <stdio.h>
