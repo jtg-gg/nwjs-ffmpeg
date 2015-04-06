@@ -175,6 +175,27 @@
           ],
         },
         {
+          'target_name': 'ffmpeg_muxing',
+          'type': 'executable', 
+          'sources': [
+            'doc/examples/muxing.c',
+          ],
+          'dependencies': [
+            'ffmpeg'
+          ],
+          'defines': [
+            'inline=__inline',
+            'strtoll=_strtoi64',
+            '_ISOC99_SOURCE',
+            '_LARGEFILE_SOURCE',
+            'HAVE_AV_CONFIG_H',
+            'strtod=avpriv_strtod',
+            'snprintf=avpriv_snprintf',
+            '_snprintf=avpriv_snprintf',
+            'vsnprintf=avpriv_vsnprintf',
+          ],
+        },
+        {
           'target_name': 'ffmpegsumo',
           'type': 'loadable_module',
           'sources': [
@@ -182,13 +203,16 @@
             '<(platform_config_root)/config.h',
             '<(platform_config_root)/libavutil/avconfig.h',
             '<(SHARED_INTERMEDIATE_DIR)/ffmpegsumo/ffmpegsumo_version.rc',
+            '../libvpx/source/config/<(OS)/<(target_arch)/vpx_config.c',
           ],
           'include_dirs': [
             '<(platform_config_root)',
             '.',
+            '../libvpx/source/libvpx',
           ],
           'dependencies': [
             'ffmpegsumo_resources',
+            '../libvpx/libvpx.gyp:libvpx',
           ],
           'defines': [
             'HAVE_AV_CONFIG_H',
