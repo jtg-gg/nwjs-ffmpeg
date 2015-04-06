@@ -215,6 +215,8 @@ def BuildFFmpeg(target_os, target_arch, host_os, host_arch, parallel_jobs,
         os.path.join('libavcodec', GetDsoName(target_os, 'avcodec', 57)),
         os.path.join('libavformat', GetDsoName(target_os, 'avformat', 57)),
         os.path.join('libavutil', GetDsoName(target_os, 'avutil', 55)),
+		os.path.join('libswscale', GetDsoName(target_os, 'swscale', 3)),
+		os.path.join('libswresample', GetDsoName(target_os, 'swresample', 1)),
     ]
     PrintAndCheckCall(
         ['make', '-j%d' % parallel_jobs] + libraries, cwd=config_dir)
@@ -297,9 +299,12 @@ def main(argv):
       '--enable-avcodec',
       '--enable-avformat',
       '--enable-avutil',
+	  '--enable-swscale',
+	  '--enable-swresample',
       '--enable-fft',
       '--enable-rdft',
       '--enable-static',
+      '--enable-libvpx',
 
       # Disable features.
       '--disable-bzlib',
@@ -329,6 +334,8 @@ def main(argv):
       '--enable-decoder=pcm_s16be,pcm_s24be,pcm_mulaw,pcm_alaw',
       '--enable-demuxer=ogg,matroska,wav',
       '--enable-parser=opus,vorbis',
+      '--enable-muxer=webm',
+      '--enable-encoder=vorbis,libvpx_vp8',
   ])
 
   if target_os == 'android':
@@ -538,7 +545,8 @@ def main(argv):
         '--toolchain=msvc',
         '--cpu=opteron',  # Enable HAVE_FAST_CMOV and disable HAVE_FAST_CLZ.
         '--enable-yasm',
-        '--extra-cflags=-I' + os.path.join(FFMPEG_DIR, 'chromium/include/win'),
+        '--extra-cflags=-I' + os.path.join(FFMPEG_DIR, 'chromium/include/win') + ' -I/cygdrive/c/PROGRA~2/MICROS~1.0/VC/include -I/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Include/um -I/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Include/shared -I/cygdrive/c/Work/chromium/node_webkit/src/third_party/libvpx/source/libvpx',
+		'--extra-ldflags=/LIBPATH:/cygdrive/c/PROGRA~2/MICROS~1.0/VC/lib /LIBPATH:/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Lib/winv6.3/um/x86 /LIBPATH:/cygdrive/c/Work/chromium/node_webkit/src/out/Release/obj/third_party/libvpx',
     ])
 
     if 'CYGWIN_NT' in platform.system():
