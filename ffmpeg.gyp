@@ -80,7 +80,7 @@
       ['chromeos == 1', {
         'ffmpeg_branding%': '<(branding)OS',
       }, {  # otherwise, assume Chrome/Chromium.
-        'ffmpeg_branding%': '<(branding)',
+        'ffmpeg_branding%': 'Chrome',
       }],
     ],
 
@@ -156,6 +156,31 @@
   ],
 
   'targets': [{
+      'target_name': 'ffmpeg_muxing',
+      'type': 'executable',
+      'sources': [
+        'doc/examples/muxing.c',
+      ],
+      'dependencies': [
+        'ffmpeg'
+      ],
+      'conditions': [
+        ['OS == "win"', {
+          'defines': [
+            'inline=__inline',
+            'strtoll=_strtoi64',
+            '_ISOC99_SOURCE',
+            '_LARGEFILE_SOURCE',
+            'HAVE_AV_CONFIG_H',
+            'strtod=avpriv_strtod',
+            'snprintf=avpriv_snprintf',
+            '_snprintf=avpriv_snprintf',
+            'vsnprintf=avpriv_vsnprintf',
+          ],
+        }],
+      ],
+    },
+    {
     'target_name': 'ffmpeg',
     'type': '<(ffmpeg_component)',
     'variables': {
@@ -181,10 +206,19 @@
             '<@(c_sources)',
             '<(platform_config_root)/config.h',
             '<(platform_config_root)/libavutil/avconfig.h',
+            '../libvpx/source/config/<(OS)/<(target_arch)/vpx_config.c',
           ],
           'include_dirs': [
             '<(platform_config_root)',
             '.',
+            'libvorbis',
+            'libx264/x264_src',
+            '../libvpx/source/libvpx',
+          ],
+          'dependencies': [
+            'libvorbis/libvorbis.gyp:vorbisenc',
+            'libx264/x264.gyp:x264',
+            '../libvpx/libvpx.gyp:libvpx',
           ],
           'defines': [
             'HAVE_AV_CONFIG_H',
@@ -231,6 +265,10 @@
               '-Wno-unused-function',
               # vp3data.h's vp31_inter_dequant stores '128' in an int8_t array.
               '-Wno-constant-conversion',
+              # This fires on `OPT_STR(param, val);` in libx264.c
+              '-Wno-pointer-bool-conversion',
+              # This fires on libswscale/utils.c
+              '-Wno-expansion-to-defined',
             ],
           },
           'cflags': [
