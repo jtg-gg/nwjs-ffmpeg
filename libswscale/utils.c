@@ -21,7 +21,9 @@
 #include "config.h"
 
 #define _SVID_SOURCE // needed for MAP_ANONYMOUS
+#ifndef _DARWIN_C_SOURCE
 #define _DARWIN_C_SOURCE // needed for MAP_ANON
+#endif
 #include <inttypes.h>
 #include <math.h>
 #include <stdio.h>
