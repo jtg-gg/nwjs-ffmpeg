@@ -78,7 +78,6 @@ void *av_buffer_get_opaque(const AVBufferRef *buf);
 //------------------------------------------------
 int av_strerror(int errnum, char *errbuf, size_t errbuf_size);
 void av_log(void *avcl, int level, const char *fmt, ...) av_printf_format(3, 4);
-int64_t av_rescale_rnd(int64_t a, int64_t b, int64_t c, enum AVRounding rnd) av_const;
 int av_get_channel_layout_nb_channels(uint64_t channel_layout);
 int av_opt_set_int(void *obj, const char *name, int64_t val, int search_flags);
 int av_opt_set_sample_fmt(void *obj, const char *name, enum AVSampleFormat fmt, int search_flags);

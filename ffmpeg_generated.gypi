@@ -360,6 +360,7 @@
       ['(1) and (1) and (1)', {
         'c_sources': [
           'libavcodec/allcodecs.c',
+          'libavcodec/audio_frame_queue.c',
           'libavcodec/avdct.c',
           'libavcodec/avfft.c',
           'libavcodec/avpacket.c',
@@ -379,6 +380,7 @@
           'libavcodec/h264pred.c',
           'libavcodec/hpeldsp.c',
           'libavcodec/imgconvert.c',
+          'libavcodec/libvorbisenc.c',
           'libavcodec/libvpxenc.c',
           'libavcodec/mathtables.c',
           'libavcodec/mdct_fixed.c',
@@ -404,7 +406,6 @@
           'libavcodec/vorbis_parser.c',
           'libavcodec/vorbisdec.c',
           'libavcodec/vorbisdsp.c',
-          'libavcodec/vorbisenc.c',
           'libavcodec/vp3.c',
           'libavcodec/vp3_parser.c',
           'libavcodec/vp3dsp.c',
@@ -434,6 +435,7 @@
           'libavformat/metadata.c',
           'libavformat/mux.c',
           'libavformat/oggdec.c',
+          'libavformat/oggenc.c',
           'libavformat/oggparsecelt.c',
           'libavformat/oggparsedirac.c',
           'libavformat/oggparseflac.c',

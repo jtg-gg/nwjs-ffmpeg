@@ -208,10 +208,12 @@
           'include_dirs': [
             '<(platform_config_root)',
             '.',
+            'libvorbis',
             '../libvpx/source/libvpx',
           ],
           'dependencies': [
             'ffmpegsumo_resources',
+            'libvorbis/libvorbis.gyp:vorbisenc',
             '../libvpx/libvpx.gyp:libvpx',
           ],
           'defines': [
