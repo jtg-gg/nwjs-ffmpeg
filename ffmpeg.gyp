@@ -70,7 +70,7 @@
       ['chromeos == 1', {
         'ffmpeg_branding%': '<(branding)OS',
       }, {  # otherwise, assume Chrome/Chromium.
-        'ffmpeg_branding%': '<(branding)',
+        'ffmpeg_branding%': 'Chrome',
       }],
     ],
 
