@@ -1,0 +1,3 @@
+[submodule "libx264/x264_src"]
+	path = libx264/x264_src
+	url = git://git.videolan.org/x264.git
