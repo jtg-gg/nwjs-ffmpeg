@@ -209,11 +209,13 @@
             '<(platform_config_root)',
             '.',
             'libvorbis',
+            'libx264/x264_src',
             '../libvpx/source/libvpx',
           ],
           'dependencies': [
             'ffmpegsumo_resources',
             'libvorbis/libvorbis.gyp:vorbisenc',
+            'libx264/x264.gyp:x264',
             '../libvpx/libvpx.gyp:libvpx',
           ],
           'defines': [

@@ -291,6 +291,7 @@
           'libavcodec/h264qpel.c',
           'libavcodec/iirfilter.c',
           'libavcodec/kbdwin.c',
+          'libavcodec/libx264.c',
           #'libavcodec/mpegaudio.c',
           #'libavcodec/mpegaudio_parser.c',
           #'libavcodec/mpegaudiodec_fixed.c',
