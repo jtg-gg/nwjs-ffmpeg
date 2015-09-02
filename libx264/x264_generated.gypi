@@ -98,6 +98,11 @@
           'x264_src/common/x86/pixel-32.asm',
         ],
       }], #target_arch == "ia32"
+      ['OS == "win"', {
+        'c_sources': [
+          'x264_src/common/win32thread.c',
+        ],
+      }], #OS == "win"
     ],  # conditions
     'c_headers': [
       'x264_src/x264cli.h',
