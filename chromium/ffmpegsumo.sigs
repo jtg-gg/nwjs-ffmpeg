@@ -106,3 +106,4 @@ int64_t av_get_default_channel_layout(int nb_channels);
 void av_image_copy(uint8_t **dst_data, int *dst_linesizes, const uint8_t **src_data, const int *src_linesizes, enum AVPixelFormat pix_fmt, int width, int height);
 void avpriv_color_frame(AVFrame *frame, const int *c);
 const AVPixFmtDescriptor *av_pix_fmt_desc_get(enum AVPixelFormat pix_fmt);
+int av_cpu_count(void);
