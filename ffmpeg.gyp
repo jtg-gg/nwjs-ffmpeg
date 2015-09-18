@@ -247,6 +247,8 @@
               '-Wno-unused-label',
               # This fires on `av_assert0(!"valid element size")` in utils.c
               '-Wno-string-conversion',
+              # This fires on `OPT_STR(param, val);` in libx264.c
+              '-Wno-pointer-bool-conversion',
             ],
           },
           'cflags': [

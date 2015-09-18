@@ -9,7 +9,10 @@
 {
   'variables': {
     'target_arch%': 'ia32', # build for a 32-bit CPU by default
-    'ogg_include_dirs%': ['../libogg/include'],
+    'ogg_include_dirs%': [
+      '../libogg/include',
+      '../libogg/config/<(OS)/<(target_arch)',
+    ],
     'ogg_libraries%': [ ],
   },
   'target_defaults': {

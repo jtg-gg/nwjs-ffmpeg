@@ -65,7 +65,6 @@
 
           
           'cflags': [
-            '-std=c99',
             '-Wshadow',
             '-ffast-math',
             '-fomit-frame-pointer',
@@ -101,6 +100,11 @@
               'defines': [
                 '_LIB',
               ],
+            }],
+            ['OS == "linux"', {
+              'cflags': ['-std=gnu99'],
+            }, {
+              'cflags': ['-std=c99'],
             }],
           ], # conditions
         }, # target x264
