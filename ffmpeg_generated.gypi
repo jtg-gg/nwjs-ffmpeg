@@ -171,6 +171,7 @@
           'libavcodec/arm/hpeldsp_init_neon.c',
           'libavcodec/arm/vp8dsp_init_neon.c',
           'libavutil/arm/float_dsp_init_neon.c',
+          'libswresample/arm/audio_convert_init.c',
         ],
         'asm_sources': [
           'libavcodec/arm/fft_fixed_neon.S',
@@ -185,6 +186,7 @@
           'libavcodec/arm/vp3dsp_neon.S',
           'libavcodec/arm/vp8dsp_neon.S',
           'libavutil/arm/float_dsp_neon.S',
+          'libswresample/arm/audio_convert_neon.S',
         ],
       }],  # ((target_arch == "arm" and arm_neon == 1)) and (1) and (1)
       ['(target_arch == "ia32" or target_arch == "x64") and (ffmpeg_branding == "Chrome" or ffmpeg_branding == "ChromeOS") and (1)', {
