@@ -502,6 +502,8 @@
           'libswresample/x86/audio_convert_init.c',
           'libswresample/x86/rematrix_init.c',
           'libswresample/x86/resample_init.c',
+        ],
+        'asm_sources': [
           'libswscale/x86/input.asm',
           'libswscale/x86/output.asm',
           'libswscale/x86/scale.asm',
