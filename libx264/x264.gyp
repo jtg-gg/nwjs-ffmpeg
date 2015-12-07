@@ -80,6 +80,10 @@
             }
           }, # msvs_settings
 
+	      'msvs_disabled_warnings': [
+            4003, 4018, 4305,
+          ],
+	
           'include_dirs': [
             '<(platform_config_root)',
             '<(x264_source_dir)',

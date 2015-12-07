@@ -41,6 +41,10 @@
       },
     },
 
+    'msvs_disabled_warnings': [
+      4305,
+    ],
+
     # common vorbis stuff
     'include_dirs': [
       # platform and arch-specific headers
