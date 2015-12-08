@@ -210,19 +210,19 @@
             '<@(c_sources)',
             '<(platform_config_root)/config.h',
             '<(platform_config_root)/libavutil/avconfig.h',
-            '../libvpx/source/config/<(OS)/<(target_arch)/vpx_config.c',
+            '../libvpx_new/source/config/<(OS)/<(target_arch)/vpx_config.c',
           ],
           'include_dirs': [
             '<(platform_config_root)',
             '.',
             'libvorbis',
             'libx264/x264_src',
-            '../libvpx/source/libvpx',
+            '../libvpx_new/source/libvpx',
           ],
           'dependencies': [
             'libvorbis/libvorbis.gyp:vorbisenc',
             'libx264/x264.gyp:x264',
-            '../libvpx/libvpx.gyp:libvpx',
+            '../libvpx_new/libvpx.gyp:libvpx_new',
           ],
           'defines': [
             'HAVE_AV_CONFIG_H',
