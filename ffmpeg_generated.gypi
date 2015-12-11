@@ -114,11 +114,11 @@
       ['(OS == "android" and target_arch == "arm64" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm64" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm64" and ffmpeg_branding == "ChromeOS")', {
         'c_sources': [
           'libavcodec/aarch64/imdct15_init.c',
-          'libavcodec/aarch64/mpegaudiodsp_init.c',
+          #'libavcodec/aarch64/mpegaudiodsp_init.c',
         ],
         'asm_sources': [
           'libavcodec/aarch64/imdct15_neon.S',
-          'libavcodec/aarch64/mpegaudiodsp_neon.S',
+          #'libavcodec/aarch64/mpegaudiodsp_neon.S',
         ],
       }],  # (OS == "android" and target_arch == "arm64" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm64" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm64" and ffmpeg_branding == "ChromeOS")
       ['(OS == "linux" and target_arch == "mipsel" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "mipsel" and ffmpeg_branding == "ChromeOS")', {
@@ -327,7 +327,7 @@
         'c_sources': [
           'libavcodec/x86/aacpsdsp_init.c',
           'libavcodec/x86/dct_init.c',
-          'libavcodec/x86/mpegaudiodsp.c',
+          #'libavcodec/x86/mpegaudiodsp.c',
           'libavcodec/x86/sbrdsp_init.c',
         ],
         'asm_sources': [
@@ -465,7 +465,7 @@
           'libavcodec/aactab.c',
           'libavcodec/ac3tab.c',
           'libavcodec/autorename_libavcodec_aacdec.c',
-          'libavcodec/autorename_libavcodec_mpegaudiodsp.c',
+          #'libavcodec/autorename_libavcodec_mpegaudiodsp.c',
           'libavcodec/dct.c',
           'libavcodec/dct32_fixed.c',
           'libavcodec/dct32_float.c',

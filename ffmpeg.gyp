@@ -74,9 +74,12 @@
       }, {  # otherwise, assume Chrome/Chromium.
         'ffmpeg_branding%': 'Chrome',
       }],
+      ['OS == "linux"', {
+        'ffmpeg_component%': "shared_library",
+      }, {  # otherwise
+        'ffmpeg_component%': '<(component)',
+      }],
     ],
-
-    'ffmpeg_component%': '<(component)',
 
     # Locations for generated artifacts.
     'shared_generated_dir': '<(SHARED_INTERMEDIATE_DIR)/third_party/ffmpeg',
@@ -171,16 +174,20 @@
       'dependencies': [
         'ffmpeg'
       ],
-      'defines': [
-        'inline=__inline',
-        'strtoll=_strtoi64',
-        '_ISOC99_SOURCE',
-        '_LARGEFILE_SOURCE',
-        'HAVE_AV_CONFIG_H',
-        'strtod=avpriv_strtod',
-        'snprintf=avpriv_snprintf',
-        '_snprintf=avpriv_snprintf',
-        'vsnprintf=avpriv_vsnprintf',
+      'conditions': [
+        ['OS == "win"', {
+          'defines': [
+            'inline=__inline',
+            'strtoll=_strtoi64',
+            '_ISOC99_SOURCE',
+            '_LARGEFILE_SOURCE',
+            'HAVE_AV_CONFIG_H',
+            'strtod=avpriv_strtod',
+            'snprintf=avpriv_snprintf',
+            '_snprintf=avpriv_snprintf',
+            'vsnprintf=avpriv_vsnprintf',
+          ],
+        }],
       ],
     },
     {
