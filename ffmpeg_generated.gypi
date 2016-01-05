@@ -411,6 +411,7 @@
           'libavcodec/aaccoder.c',
           'libavcodec/aacenc.c',
           'libavcodec/aacenc_is.c',
+          'libavcodec/aacenc_ltp.c',
           'libavcodec/aacenc_pred.c',
           'libavcodec/aacenc_tns.c',
           'libavcodec/aacenctab.c',
