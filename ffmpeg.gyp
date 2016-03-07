@@ -84,7 +84,7 @@
       }],
     ],
 
-    'ffmpeg_component%': '<(component)',
+    'ffmpeg_component%': 'shared_library',
 
     # Locations for generated artifacts.
     'shared_generated_dir': '<(SHARED_INTERMEDIATE_DIR)/third_party/ffmpeg',
