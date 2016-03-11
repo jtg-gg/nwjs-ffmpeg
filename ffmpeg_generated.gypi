@@ -347,6 +347,7 @@
         'c_sources': [
           'libavutil/arm/float_dsp_init_neon.c',
           'libswresample/arm/audio_convert_init.c',
+          'libswscale/arm/swscale_unscaled.c',
         ],
         'asm_sources': [
           'libavcodec/arm/autorename_libavcodec_arm_fft_neon.S',
@@ -357,6 +358,10 @@
           'libavcodec/arm/rdft_neon.S',
           'libavutil/arm/autorename_libavutil_arm_float_dsp_neon.S',
           'libswresample/arm/audio_convert_neon.S',
+          'libswscale/arm/rgb2yuv_neon_16.S',
+          'libswscale/arm/rgb2yuv_neon_32.S',
+          'libswscale/arm/rgb2yuv_neon_common.S',
+          'libswscale/arm/yuv2rgb_neon.S',
         ],
       }],  # (OS == "android" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chrome") or (OS == "android" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chromium") or (OS == "android" and target_arch == "arm" and ffmpeg_branding == "Chrome") or (OS == "android" and target_arch == "arm" and ffmpeg_branding == "Chromium") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "ChromeOS") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chromium") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "ChromiumOS")
       ['(OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "ChromeOS") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "Chromium") or (OS == "linux" and target_arch == "arm" and arm_neon == 1 and ffmpeg_branding == "ChromiumOS") or (OS == "linux" and target_arch == "arm" and ffmpeg_branding == "Chrome") or (OS == "linux" and target_arch == "arm" and ffmpeg_branding == "ChromeOS") or (OS == "linux" and target_arch == "arm" and ffmpeg_branding == "Chromium") or (OS == "linux" and target_arch == "arm" and ffmpeg_branding == "ChromiumOS")', {

@@ -66,6 +66,7 @@
           
           'cflags': [
             '-Wshadow',
+            '-Wno-unused-function',
             '-ffast-math',
             '-fomit-frame-pointer',
             '-fno-tree-vectorize',

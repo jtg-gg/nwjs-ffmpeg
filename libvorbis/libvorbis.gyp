@@ -96,6 +96,9 @@
       'product_prefix': 'lib',
       'type': 'static_library',
       'dependencies': [ 'libvorbis' ],
+      'cflags': [
+        '-Wno-unused-function',
+      ], # cflags
       'sources': [
         'lib/vorbisenc.c'
       ]
@@ -118,6 +121,9 @@
       'product_prefix': '',
       'type': 'static_library',
       'dependencies': [ '../libogg/libogg.gyp:ogg' ],
+      'cflags': [
+        '-Wno-unused-function',
+      ], # cflags
       'sources': [
         'lib/mdct.c',
         'lib/smallft.c',
