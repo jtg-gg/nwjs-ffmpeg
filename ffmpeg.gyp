@@ -267,6 +267,8 @@
               '-Wno-constant-conversion',
               # This fires on `OPT_STR(param, val);` in libx264.c
               '-Wno-pointer-bool-conversion',
+              # This fires on libswscale/utils.c
+              '-Wno-expansion-to-defined',
             ],
           },
           'cflags': [
