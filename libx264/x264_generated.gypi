@@ -47,6 +47,7 @@
           'x264_src/common/arm/quant-a.S',
           'x264_src/common/arm/deblock-a.S',
           'x264_src/common/arm/predict-a.S',
+          'x264_src/common/arm/bitstream-a.S',
         ],
         'asm_sources': [
         ],
