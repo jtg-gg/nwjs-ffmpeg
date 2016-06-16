@@ -6,4 +6,5 @@ static const AVInputFormat * const demuxer_list[] = {
     &ff_mp3_demuxer,
     &ff_ogg_demuxer,
     &ff_wav_demuxer,
+    &ff_flv_demuxer,
     NULL };
