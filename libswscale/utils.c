@@ -22,7 +22,7 @@
 
 #define _DEFAULT_SOURCE
 #define _SVID_SOURCE // needed for MAP_ANONYMOUS
-#define _DARWIN_C_SOURCE // needed for MAP_ANON
+//#define _DARWIN_C_SOURCE // needed for MAP_ANON
 #include <inttypes.h>
 #include <math.h>
 #include <stdio.h>
@@ -338,7 +338,8 @@ static av_cold int initFilter(int16_t **outFilter, int32_t **filterPos,
     const int64_t fone = 1LL << (54 - FFMIN(av_log2(srcW/dstW), 8));
     int ret            = -1;
 
-    emms_c(); // FIXME should not be required but IS (even for non-MMX versions)
+    emms_c()
+    ; // FIXME should not be required but IS (even for non-MMX versions)
 
     // NOTE: the +3 is for the MMX(+1) / SSE(+3) scaler which reads over the end
     FF_ALLOC_ARRAY_OR_GOTO(NULL, *filterPos, (dstW + 3), sizeof(**filterPos), fail);
