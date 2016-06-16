@@ -1,0 +1,94 @@
+import("../ffmpeg_options.gni")
+import("x264_generated.gni")
+
+x264_arch = ffmpeg_arch
+if (x264_arch == "arm-neon") {
+  x264_arch = "arm"
+} 
+
+platform_config_root = "config/$os_config/$x264_arch"
+
+has_yasm_deps = x264_yasm_sources != [] && (current_cpu == "x86" || current_cpu == "x64") && os_config != "linux-noasm"
+if (has_yasm_deps) {
+  import("//third_party/yasm/yasm_assemble.gni")
+  yasm_assemble("libx264_yasm") {
+    sources = x264_yasm_sources
+
+    # Ensure the architecture defines go in the command line before the -P
+    # file below, so don't use defines.
+    yasm_flags = []
+    if (ffmpeg_arch == "ia32") {
+      yasm_flags += [ "-DARCH_X86_64=0" ]
+    } else if (ffmpeg_arch == "x64") {
+      yasm_flags += [ "-DARCH_X86_64=1" ]
+    }
+
+    defines = [
+      "PIC",
+      "HIGH_BIT_DEPTH=0",
+      "BIT_DEPTH=8",
+      "HAVE_ALIGNED_STACK=1",
+    ]
+
+    include_dirs = [
+      platform_config_root,
+      x264_source_dir,
+      ".",
+    ]
+
+    # Disable warnings, prevents log spam for things we won't fix.
+    yasm_flags += [
+      "-w",
+      "-P", rebase_path("$platform_config_root/config.asm", root_build_dir),
+    ]
+
+    if (is_mac) {
+      # Necessary to ensure symbols end up with a _ prefix; added by
+      # yasm_compile.gypi for Windows, but not Mac.
+      defines += [ "PREFIX" ]
+    }
+  }
+}
+
+config("libx264_config") {
+  include_dirs = [
+    # platform and arch-specific headers
+      platform_config_root,
+      x264_source_dir,
+      ".",
+  ]
+  cflags = []
+  if (!is_win) {
+    cflags += [
+#     "-Wshadow",
+#     "-Wno-unused-function",
+      "-ffast-math",
+      "-fomit-frame-pointer",
+      "-fno-tree-vectorize",
+    ] # cflags
+  }
+}
+
+static_library("libx264_encoder") {
+  configs -= [ "//build/config/compiler:chromium_code" ]
+  sources = x264_encoder_c_sources
+  public_configs = [":libx264_config"]
+}
+
+static_library("libx264") {
+  configs -= [ "//build/config/compiler:chromium_code" ]
+
+  public_deps = [
+    ":libx264_encoder",
+  ]
+
+  if (has_yasm_deps) {
+    deps = [ ":libx264_yasm" ]
+  }
+
+  sources = x264_c_sources + [
+    "$platform_config_root/config.h",
+    "$platform_config_root/x264_config.h",
+  ]
+
+}
