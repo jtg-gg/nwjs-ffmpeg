@@ -1,0 +1,32 @@
+import("../ffmpeg_options.gni")
+
+config("libogg_config") {
+  defines = [
+    "PIC",
+    "HAVE_CONFIG_H",
+  ]
+
+  ogg_vorbis_arch = ffmpeg_arch
+  if (ogg_vorbis_arch == "arm-neon") {
+    ogg_vorbis_arch = "arm"
+  } 
+
+  include_dirs = [
+    # platform and arch-specific headers
+      "config/$os_config/$ogg_vorbis_arch",
+      "include",
+  ]
+}
+
+static_library("libogg") {
+  sources = [
+    "src/framing.c",
+    "src/bitwise.c",
+  ]
+  public_configs = [":libogg_config"]
+}
+
+executable("libogg_test") {
+  deps = [ ":libogg" ]
+  sources = [ "test.c" ]
+}

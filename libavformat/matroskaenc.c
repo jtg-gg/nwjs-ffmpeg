@@ -1719,7 +1719,7 @@ static int mkv_write_attachments(AVFormatContext *s)
 {
     MatroskaMuxContext *mkv = s->priv_data;
     AVIOContext *dyn_cp = NULL, *pb = s->pb;
-    int i, ret;
+    int i, ret = -1;
 
     if (!mkv->nb_attachments)
         return 0;

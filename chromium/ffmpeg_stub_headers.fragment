@@ -6,6 +6,8 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavcodec/avfft.h>
 #include <libavformat/avformat.h>
+#include <libswscale/swscale.h>
+struct AVPixFmtDescriptor;
 
 typedef int (*AVLockMgrOperation)(void**, enum AVLockOp);
 typedef void (*AVLogCallback)(void*, int, const char*, va_list);
