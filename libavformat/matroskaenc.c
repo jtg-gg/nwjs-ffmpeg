@@ -1737,7 +1737,7 @@ static int mkv_write_attachments(AVFormatContext *s)
     AVIOContext *dyn_cp, *pb = s->pb;
     ebml_master attachments;
     AVLFG c;
-    int i, ret;
+    int i, ret = -1;
 
     if (!mkv->have_attachments)
         return 0;

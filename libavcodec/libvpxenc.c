@@ -1197,7 +1197,7 @@ static int vpx_encode(AVCodecContext *avctx, AVPacket *pkt,
     {"arnr_max_frames", "altref noise reduction max frame count", offsetof(VPxContext, arnr_max_frames), AV_OPT_TYPE_INT, {.i64 = 0}, 0, 15, VE}, \
     {"arnr_strength", "altref noise reduction filter strength", offsetof(VPxContext, arnr_strength), AV_OPT_TYPE_INT, {.i64 = 3}, 0, 6, VE}, \
     {"arnr_type", "altref noise reduction filter type", offsetof(VPxContext, arnr_type), AV_OPT_TYPE_INT, {.i64 = 3}, 1, 3, VE}, \
-    {"rc_lookahead", "Number of frames to look ahead for alternate reference frame selection", offsetof(VPxContext, lag_in_frames), AV_OPT_TYPE_INT, {.i64 = 25}, 0, 25, VE}, \
+    {"rc_lookahead", "Number of frames to look ahead for alternate reference frame selection", offsetof(VPxContext, lag_in_frames), AV_OPT_TYPE_INT, {.i64 = 0}, 0, 25, VE}, \
     {"sharpness", "Increase sharpness at the expense of lower PSNR", offsetof(VPxContext, sharpness), AV_OPT_TYPE_INT, {.i64 = -1}, -1, 7, VE},
 
 #if CONFIG_LIBVPX_VP8_ENCODER
