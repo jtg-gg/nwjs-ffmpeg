@@ -251,6 +251,8 @@ def BuildFFmpeg(target_os, target_arch, host_os, host_arch, parallel_jobs,
         os.path.join('libavcodec', GetDsoName(target_os, 'avcodec', 58)),
         os.path.join('libavformat', GetDsoName(target_os, 'avformat', 58)),
         os.path.join('libavutil', GetDsoName(target_os, 'avutil', 56)),
+		os.path.join('libswscale', GetDsoName(target_os, 'swscale', 3)),
+		os.path.join('libswresample', GetDsoName(target_os, 'swresample', 1)),
     ]
     PrintAndCheckCall(
         ['make', '-j%d' % parallel_jobs] + libraries, cwd=config_dir)
@@ -394,10 +396,13 @@ def ConfigureAndBuild(target_arch, target_os, host_os, host_arch, parallel_jobs,
       '--enable-avcodec',
       '--enable-avformat',
       '--enable-avutil',
+      '--enable-swscale',
+      '--enable-swresample',
       '--enable-fft',
       '--enable-rdft',
       '--enable-static',
       '--enable-libopus',
+      '--enable-libvpx',
 
       # Disable features.
       '--disable-bzlib',
@@ -426,6 +431,8 @@ def ConfigureAndBuild(target_arch, target_os, host_os, host_arch, parallel_jobs,
       '--enable-decoder=pcm_s16be,pcm_s24be,pcm_mulaw,pcm_alaw',
       '--enable-demuxer=ogg,matroska,wav,flac,mp3,mov',
       '--enable-parser=opus,vorbis,flac,mpegaudio',
+      '--enable-muxer=webm',
+      '--enable-encoder=vorbis,libvpx_vp8',
 
       # Setup include path so Chromium's libopus can be used.
       '--extra-cflags=-I' +
@@ -681,7 +688,8 @@ def ConfigureAndBuild(target_arch, target_os, host_os, host_arch, parallel_jobs,
 
     configure_flags['Common'].extend([
         '--toolchain=msvc',
-        '--extra-cflags=-I' + os.path.join(FFMPEG_DIR, 'chromium/include/win'),
+        '--extra-cflags=-I' + os.path.join(FFMPEG_DIR, 'chromium/include/win') + ' -I/cygdrive/c/PROGRA~2/MICROS~1.0/VC/include -I/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Include/um -I/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Include/shared -I/cygdrive/c/Work/chromium/node_webkit/src/third_party/libvpx/source/libvpx',
+		'--extra-ldflags=/LIBPATH:/cygdrive/c/PROGRA~2/MICROS~1.0/VC/lib /LIBPATH:/cygdrive/c/PROGRA~2/WI3CF2~1/8.1/Lib/winv6.3/um/x86 /LIBPATH:/cygdrive/c/Work/chromium/node_webkit/src/out/Release/obj/third_party/libvpx',
     ])
 
     if 'CYGWIN_NT' in platform.system():
