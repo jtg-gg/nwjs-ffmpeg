@@ -8,6 +8,8 @@ config("libvorbis_config") {
   include_dirs = [
     # platform and arch-specific headers
       "config/$os_config/$ffmpeg_arch",
+      "../libogg/include",
+      "../libogg/config/$os_config/$ffmpeg_arch",
       "include",
   ]
   if(is_win) {
@@ -21,6 +23,7 @@ static_library("libvorbisenc") {
   deps = [":libvorbis"]
   include_dirs = ["lib"]
   sources = ["lib/vorbisenc.c"]
+  public_configs = [":libvorbis_config"]
 }
 
 static_library("libvorbis") {
