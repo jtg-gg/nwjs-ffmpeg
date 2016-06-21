@@ -12,10 +12,10 @@ if (has_yasm_deps) {
     # Ensure the architecture defines go in the command line before the -P
     # file below, so don't use defines.
     yasm_flags = []
-    if (current_cpu == "x86") {
-      yasm_flags += [ "-DARCH_X86_32" ]
-    } else if (current_cpu == "x64") {
-      yasm_flags += [ "-DARCH_X86_64" ]
+    if (ffmpeg_arch == "ia32") {
+      yasm_flags += [ "-DARCH_X86_64=0" ]
+    } else if (ffmpeg_arch == "x64") {
+      yasm_flags += [ "-DARCH_X86_64=1" ]
     }
 
     defines = [
@@ -52,14 +52,16 @@ config("libx264_config") {
       x264_source_dir,
       ".",
   ]
-
-  cflags = [
-#   "-Wshadow",
-#   "-Wno-unused-function",
-    "-ffast-math",
-    "-fomit-frame-pointer",
-    "-fno-tree-vectorize",
-  ] # cflags
+  cflags = []
+  if (!is_win) {
+    cflags += [
+#     "-Wshadow",
+#     "-Wno-unused-function",
+      "-ffast-math",
+      "-fomit-frame-pointer",
+      "-fno-tree-vectorize",
+    ] # cflags
+  }
 }
 
 static_library("libx264_encoder") {

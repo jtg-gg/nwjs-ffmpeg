@@ -10,6 +10,12 @@ config("libvorbis_config") {
       "config/$os_config/$ffmpeg_arch",
       "include",
   ]
+  if(is_win) {
+    cflags = [
+      "/wd4706", # assignment within conditional expression
+      "/wd4305", # truncation from double to float
+    ]
+  }
 }
 static_library("libvorbisenc") {
   deps = [":libvorbis"]
