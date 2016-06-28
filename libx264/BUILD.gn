@@ -1,7 +1,12 @@
 import("../ffmpeg_options.gni")
 import("x264_generated.gni")
 
-platform_config_root = "config/$os_config/$ffmpeg_arch"
+x264_arch = ffmpeg_arch
+if (x264_arch == "arm-neon") {
+  x264_arch = "arm"
+} 
+
+platform_config_root = "config/$os_config/$x264_arch"
 
 has_yasm_deps = x264_yasm_sources != [] && (current_cpu == "x86" || current_cpu == "x64") && os_config != "linux-noasm"
 if (has_yasm_deps) {
@@ -74,9 +79,12 @@ static_library("libx264") {
   configs -= [ "//build/config/compiler:chromium_code" ]
 
   public_deps = [
-    ":libx264_yasm",
     ":libx264_encoder",
   ]
+
+  if (has_yasm_deps) {
+    deps = [ ":libx264_yasm" ]
+  }
 
   sources = x264_c_sources + [
     "$platform_config_root/config.h",

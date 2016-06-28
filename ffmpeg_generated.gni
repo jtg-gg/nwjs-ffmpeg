@@ -377,7 +377,7 @@ if ((is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "C
   ffmpeg_c_sources += [
     "libavutil/arm/float_dsp_init_neon.c",
     "libswresample/arm/audio_convert_init.c",
-    "libswscale/arm/swscale_unscaled.c",
+    "libswscale/arm/autorename_swscale_unscaled.c",
 
   ]
   ffmpeg_gas_sources += [

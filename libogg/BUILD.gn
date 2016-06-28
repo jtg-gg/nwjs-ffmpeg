@@ -5,9 +5,15 @@ config("libogg_config") {
     "PIC",
     "HAVE_CONFIG_H",
   ]
+
+  ogg_vorbis_arch = ffmpeg_arch
+  if (ogg_vorbis_arch == "arm-neon") {
+    ogg_vorbis_arch = "arm"
+  } 
+
   include_dirs = [
     # platform and arch-specific headers
-      "config/$os_config/$ffmpeg_arch",
+      "config/$os_config/$ogg_vorbis_arch",
       "include",
   ]
 }

@@ -5,11 +5,17 @@ config("libvorbis_config") {
     "PIC",
     "HAVE_CONFIG_H",
   ]
+  
+  ogg_vorbis_arch = ffmpeg_arch
+  if (ogg_vorbis_arch == "arm-neon") {
+    ogg_vorbis_arch = "arm"
+  } 
+
   include_dirs = [
     # platform and arch-specific headers
-      "config/$os_config/$ffmpeg_arch",
+      "config/$os_config/$ogg_vorbis_arch",
       "../libogg/include",
-      "../libogg/config/$os_config/$ffmpeg_arch",
+      "../libogg/config/$os_config/$ogg_vorbis_arch",
       "include",
   ]
   if(is_win) {
@@ -17,6 +23,8 @@ config("libvorbis_config") {
       "/wd4706", # assignment within conditional expression
       "/wd4305", # truncation from double to float
     ]
+  } else {
+    cflags = ["-Wno-unused-function"]
   }
 }
 static_library("libvorbisenc") {
