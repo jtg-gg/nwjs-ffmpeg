@@ -473,7 +473,12 @@ static av_cold int X264_init(AVCodecContext *avctx)
     x264_param_default(&x4->params);
 
     x4->params.b_deblocking_filter         = avctx->flags & AV_CODEC_FLAG_LOOP_FILTER;
-
+    x4->preset = av_strdup("ultrafast");
+    x4->tune = av_strdup("zerolatency");
+    avctx->bit_rate = avctx->rc_max_rate = 0;
+    avctx->gop_size = 100;
+    avctx->thread_count = 1;
+    avctx->slices = 1;
     if (x4->preset || x4->tune)
         if (x264_param_default_preset(&x4->params, x4->preset, x4->tune) < 0) {
             int i;
