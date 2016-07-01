@@ -588,6 +588,7 @@ void avcodec_register_all(void)
     REGISTER_ENCODER(LIBWEBP_ANIM,      libwebp_anim);  /* preferred over libwebp */
     REGISTER_ENCODER(LIBWEBP,           libwebp);
     REGISTER_ENCODER(LIBX262,           libx262);
+    REGISTER_ENCODER(LIBOPENH264,       libopenh264);
     REGISTER_ENCODER(LIBX264,           libx264);
     REGISTER_ENCODER(LIBX264RGB,        libx264rgb);
     REGISTER_ENCODER(LIBX265,           libx265);
@@ -602,7 +603,6 @@ void avcodec_register_all(void)
 
     /* external libraries, that shouldn't be used by default if one of the
      * above is available */
-    REGISTER_ENCODER(LIBOPENH264,       libopenh264);
     REGISTER_ENCODER(H264_QSV,          h264_qsv);
     REGISTER_ENCODER(NVENC,             nvenc);
     REGISTER_ENCODER(NVENC_H264,        nvenc_h264);

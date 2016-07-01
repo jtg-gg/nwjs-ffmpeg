@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include <wels/codec_api.h>
-#include <wels/codec_ver.h>
+#include <codec_api.h>
+#include <codec_ver.h>
 
 #include "libavutil/attributes.h"
 #include "libavutil/common.h"
@@ -152,18 +152,18 @@ FF_ENABLE_DEPRECATION_WARNINGS
     param.fMaxFrameRate              = 1/av_q2d(avctx->time_base);
     param.iPicWidth                  = avctx->width;
     param.iPicHeight                 = avctx->height;
-    param.iTargetBitrate             = avctx->bit_rate;
-    param.iMaxBitrate                = FFMAX(avctx->rc_max_rate, avctx->bit_rate);
-    param.iRCMode                    = RC_QUALITY_MODE;
+    param.iTargetBitrate             = 0;//avctx->bit_rate;
+    param.iMaxBitrate                = 0;//FFMAX(avctx->rc_max_rate, avctx->bit_rate);
+    param.iRCMode                    = RC_OFF_MODE;
     param.iTemporalLayerNum          = 1;
     param.iSpatialLayerNum           = 1;
     param.bEnableDenoise             = 0;
     param.bEnableBackgroundDetection = 1;
     param.bEnableAdaptiveQuant       = 1;
-    param.bEnableFrameSkip           = s->skip_frames;
+    param.bEnableFrameSkip           = true;//s->skip_frames;
     param.bEnableLongTermReference   = 0;
     param.iLtrMarkPeriod             = 30;
-    param.uiIntraPeriod              = avctx->gop_size;
+    param.uiIntraPeriod              = 100;//avctx->gop_size;
 #if OPENH264_VER_AT_LEAST(1, 4)
     param.eSpsPpsIdStrategy          = CONSTANT_ID;
 #else
@@ -172,7 +172,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
     param.bPrefixNalAddingCtrl       = 0;
     param.iLoopFilterDisableIdc      = !s->loopfilter;
     param.iEntropyCodingModeFlag     = 0;
-    param.iMultipleThreadIdc         = avctx->thread_count;
+    param.iMultipleThreadIdc         = 1;//avctx->thread_count;
     if (s->profile && !strcmp(s->profile, "main"))
         param.iEntropyCodingModeFlag = 1;
     else if (!s->profile && s->cabac)
@@ -196,7 +196,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
         s->slice_mode = SM_DYN_SLICE;
 
     param.sSpatialLayers[0].sSliceCfg.uiSliceMode               = s->slice_mode;
-    param.sSpatialLayers[0].sSliceCfg.sSliceArgument.uiSliceNum = avctx->slices;
+    param.sSpatialLayers[0].sSliceCfg.sSliceArgument.uiSliceNum = 1;//avctx->slices;
 
     if (s->slice_mode == SM_DYN_SLICE) {
         if (s->max_nal_size){
