@@ -214,11 +214,13 @@
             'libvorbis',
             'libx264/x264_src',
             '../libvpx/source/libvpx',
+            '../openh264/src/codec/api/svc',
           ],
           'dependencies': [
             'libvorbis/libvorbis.gyp:vorbisenc',
             'libx264/x264.gyp:x264',
             '../libvpx/libvpx.gyp:libvpx',
+            '../openh264/openh264.gyp:openh264_encoder',
           ],
           'defines': [
             'HAVE_AV_CONFIG_H',

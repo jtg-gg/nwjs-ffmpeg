@@ -566,6 +566,7 @@
           'libavcodec/frame_thread_encoder.c',
           'libavcodec/golomb.c',
           'libavcodec/imgconvert.c',
+          'libavcodec/libopenh264enc.c',
           'libavcodec/libvorbisenc.c',
           'libavcodec/libvpxenc.c',
           'libavcodec/mathtables.c',

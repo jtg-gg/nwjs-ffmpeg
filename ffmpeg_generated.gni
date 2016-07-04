@@ -34,6 +34,7 @@ if ((is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "C
     "libavcodec/frame_thread_encoder.c",
     "libavcodec/golomb.c",
     "libavcodec/imgconvert.c",
+    "libavcodec/libopenh264enc.c",
     "libavcodec/libvorbisenc.c",
     "libavcodec/libvpxenc.c",
     "libavcodec/mathtables.c",

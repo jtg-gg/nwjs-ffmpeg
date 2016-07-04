@@ -134,6 +134,7 @@ source_set("ffmpeg_internal") {
   include_dirs = [
     platform_config_root,
     ".",
+    "../openh264/src/codec/api/svc",
   ]
   defines = [
     "HAVE_AV_CONFIG_H",
@@ -354,6 +355,7 @@ source_set("ffmpeg_internal") {
     "libvorbis:libvorbisenc",
     "libx264:libx264",
     "../libvpx:libvpx",
+    "../openh264:encoder",
   ]
 }
 
