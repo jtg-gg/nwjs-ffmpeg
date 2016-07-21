@@ -80,14 +80,14 @@
       'x264_src/common/x86/mc-c.c',
       'x264_src/common/x86/predict-c.c',
       'x264_src/encoder/analyse.c',
-      'x264_src/encoder/cabac.c',
+      'autorename_encoder_cabac.c',
       'x264_src/encoder/cavlc.c',
       'x264_src/encoder/encoder.c',
       'x264_src/encoder/lookahead.c',
-      'x264_src/encoder/macroblock.c',
+      'autorename_encoder_macroblock.c',
       'x264_src/encoder/me.c',
       'x264_src/encoder/ratecontrol.c',
-      'x264_src/encoder/set.c',
+      'autorename_encoder_set.c',
     ],  # c_sources
     'c_headers': [
       'x264_src/x264cli.h',
