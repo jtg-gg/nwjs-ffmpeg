@@ -365,6 +365,11 @@ if (is_component_ffmpeg) {
     # So we can append below and assume they're defined.
     ldflags = []
 
+    if (is_mac) {
+      ldflags += [
+        "-Wl,-install_name,@loader_path/libffmpeg.dylib"
+      ]
+    }
     if (is_posix && !is_mac) {
       # Fixes warnings PIC relocation when building as component.
       ldflags += [
