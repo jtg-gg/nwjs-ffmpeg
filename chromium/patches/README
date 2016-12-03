@@ -1,5 +1,10 @@
 Upstream cherry-picks, most recent cherry-picks at end of list:
   9d83b209d8861f1daf55f6719b1e0c226ed7269a lavf/mov.c mov_fix_index() fix for nb_old <=0
+  acc163c6ab52d2235767852262c64c7f6b273d1c lavc/flacdsp_template: Fix undefined shift in flac_decorrelate_indep_c
+  83a75bf6c31b3c0ce2ca7e1426d1f2e3df634239 lavc/flacdec: Fix signed integer overflow in decode_subframe_fixed()
+  c72fa432349881d5a445cd110abf698cc94d490d lavc/get_bits: Fix get_sbits_long(x, 0)
+  1f5630af51f24d79053b6bef5b8b3ba93d637306 lavc/flacdec: Fix undefined shift in decode_subframe()
+
 
 Autorename:
   autorename_* files are renamed copies of various files that would cause
@@ -62,6 +67,16 @@ Current patches:
     commit e4decbe7 includes a downstream declaration of |ret| in
     mov_seek_stream in mov.c.
 
+  Other changes to libavformat/mov.c:
+    Avoid heap allocation wrap when allocating title_str in mov_read_hdlr().
+    TODO: push upstream.
+
+    Avoid heap allocation wraps when allocating buffers in mov_read_uuid().
+    TODO: push upstream.
+
+    Avoid heap allocation wraps and OOB in mov_read_{senc,saiz,udta_string}().
+    TODO: push upstream.
+
   Changes to libavformat/matroskadec.c
     Add CONFIG_LZO and CONFIG_SIPR_DECODER (and other CONFIG_*) checks to remove
     code that may be a security risk. Discuss with cevans@ before removing.
@@ -74,7 +89,7 @@ Current patches:
     Fixes for MSAN Use-of-uninitialized-value. http://crbug.com/666874.
     TODO(chcunningham): Submit upstream.
 
-    Other changes: TODO(chcunningham/dalecurtis): https://crbug.com/504623 - 
+    Other changes: TODO(chcunningham/dalecurtis): https://crbug.com/504623 -
     Determine whether these changes are still necessary and either remove or
     document them.
 
