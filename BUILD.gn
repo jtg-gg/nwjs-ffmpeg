@@ -418,6 +418,9 @@ if (is_component_ffmpeg) {
       sources = [
         "$target_gen_dir/ffmpeg.def",
       ]
+      ldflags += [
+        "/ignore:4049"
+      ]
     }
   }
 } else {
