@@ -28,6 +28,10 @@ x264_yasm_sources = []
           "x264_src/common/x86/quant-a.asm",
           "x264_src/common/x86/sad-a.asm",
         ]
+        x264_c_sources += [
+          "x264_src/common/x86/mc-c.c",
+          "x264_src/common/x86/predict-c.c",
+        ]
       }  # (ffmpeg_arch == "ia32" || ffmpeg_arch == "x64")
 
       if (ffmpeg_arch == "x64") {
@@ -86,8 +90,6 @@ x264_yasm_sources = []
       "x264_src/common/set.c",
       "x264_src/common/threadpool.c",
       "x264_src/common/vlc.c",
-      "x264_src/common/x86/mc-c.c",
-      "x264_src/common/x86/predict-c.c",
     ]  # x264_c_sources
 
     x264_encoder_c_sources += [
