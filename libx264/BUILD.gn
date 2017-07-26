@@ -92,8 +92,3 @@ static_library("libx264") {
   ]
 
 }
-
-executable("libx264_test") {
-  deps = [ ":libx264" ]
-  sources = [ "test.c" ]
-}
