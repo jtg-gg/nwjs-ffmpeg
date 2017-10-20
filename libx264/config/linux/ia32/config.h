@@ -1,6 +1,6 @@
 #define HAVE_MALLOC_H 1
 #define HAVE_X86_INLINE_ASM 1
-#define HAVE_MMX 1
+#define HAVE_MMX 0
 #define ARCH_X86 1
 #define SYS_LINUX 1
 #define STACK_ALIGNMENT 16
