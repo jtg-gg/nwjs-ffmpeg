@@ -95,3 +95,6 @@ Current patches:
   libavformat/mov.c
     mov_read_stts(): Fix stts memory allocation (use i + 1 instead of i).
     https://crbug.com/801821
+
+  libavformat/mov.c
+    mov_read_trun(): Fix memset size on ctts_data. https://crbug.com/812567
