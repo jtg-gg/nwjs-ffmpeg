@@ -264,6 +264,7 @@ if ((current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && curr
     "libavcodec/sinewin_fixed.c",
     "libavformat/aacdec.c",
     "libavformat/apetag.c",
+    "libavformat/flvdec.c",
     "libavformat/flvenc.c",
     "libavformat/img2.c",
     "libavformat/movenc.c",
