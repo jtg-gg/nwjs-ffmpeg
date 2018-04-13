@@ -2140,7 +2140,7 @@ static int handle_invoke_status(URLContext *s, RTMPPacket *pkt)
                                        tmpstr, sizeof(tmpstr));
         if (!t)
             av_log(s, AV_LOG_ERROR, "Server error: %s\n", tmpstr);
-        return -1;
+        return 0;
     }
 
     t = ff_amf_get_field_value(ptr, data_end, "code", tmpstr, sizeof(tmpstr));
@@ -2149,6 +2149,7 @@ static int handle_invoke_status(URLContext *s, RTMPPacket *pkt)
     if (!t && !strcmp(tmpstr, "NetStream.Play.UnpublishNotify")) rt->state = STATE_STOPPED;
     if (!t && !strcmp(tmpstr, "NetStream.Publish.Start")) rt->state = STATE_PUBLISHING;
     if (!t && !strcmp(tmpstr, "NetStream.Seek.Notify")) rt->state = STATE_PLAYING;
+    if (!t && !strcmp(tmpstr, "NetStream.Unpublish.Success")) return AVERROR(MKTAG('R','N','U','P')); // RTMP NetStream UnPublish
 
     return 0;
 }
@@ -2657,6 +2658,8 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
         else
             ff_url_join(buf, sizeof(buf), "tcp", NULL, hostname, port, NULL);
     }
+    AVDictionary* original_opts = NULL;
+    av_dict_copy(&original_opts, *opts, 0);
 
 reconnect:
     if ((ret = ffurl_open_whitelist(&rt->stream, buf, AVIO_FLAG_READ_WRITE,
@@ -2828,8 +2831,10 @@ reconnect:
             memset(rt->prev_pkt[i], 0,
                    sizeof(**rt->prev_pkt) * rt->nb_prev_pkt[i]);
         free_tracked_methods(rt);
+        av_dict_copy(opts, original_opts, 0);
         goto reconnect;
     }
+    av_dict_free(&original_opts);
 
     if (rt->is_input) {
         // generate FLV header for demuxer
@@ -2878,6 +2883,7 @@ reconnect:
     return 0;
 
 fail:
+    av_dict_free(&original_opts);
     av_dict_free(opts);
     rtmp_close(s);
     return ret;
@@ -3109,7 +3115,7 @@ static const AVOption rtmp_options[] = {
     {"rtmp_tcurl", "URL of the target stream. Defaults to proto://host[:port]/app.", OFFSET(tcurl), AV_OPT_TYPE_STRING, {.str = NULL }, 0, 0, DEC|ENC},
     {"rtmp_listen", "Listen for incoming rtmp connections", OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, "rtmp_listen" },
     {"listen",      "Listen for incoming rtmp connections", OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, "rtmp_listen" },
-    {"timeout", "Maximum timeout (in seconds) to wait for incoming connections. -1 is infinite. Implies -rtmp_listen 1",  OFFSET(listen_timeout), AV_OPT_TYPE_INT, {.i64 = -1}, INT_MIN, INT_MAX, DEC, "rtmp_listen" },
+    {"rtmp_listen_timeout", "Maximum timeout (in seconds) to wait for incoming connections. -1 is infinite. Implies -rtmp_listen 1",  OFFSET(listen_timeout), AV_OPT_TYPE_INT, {.i64 = -1}, INT_MIN, INT_MAX, DEC, "rtmp_listen" },
     { NULL },
 };
 
