@@ -84,6 +84,7 @@ void av_packet_free(AVPacket **pkt);
 void av_packet_rescale_ts(AVPacket *pkt, AVRational tb_src, AVRational tb_dst);
 AVCodec *avcodec_find_encoder(enum AVCodecID id);
 int avio_open2(AVIOContext **s, const char *filename, int flags, const AVIOInterruptCB *int_cb, AVDictionary **options);
+int avio_read_partial(AVIOContext *s, unsigned char *buf, int size);
 void avio_context_free(AVIOContext **s);
 int avformat_alloc_output_context2(AVFormatContext **ctx, AVOutputFormat *oformat, const char *format_name, const char *filename);
 int avformat_network_init(void);
