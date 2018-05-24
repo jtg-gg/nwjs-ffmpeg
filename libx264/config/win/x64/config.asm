@@ -1,7 +1,7 @@
 %define HAVE_MMX 1
 %define ARCH_X86_64 1
 %define SYS_WINDOWS 1
-%define STACK_ALIGNMENT 4
+%define STACK_ALIGNMENT 16
 %define HAVE_WIN32THREAD 1
 %define HAVE_THREAD 1
 %define HAVE_LOG2F 1
