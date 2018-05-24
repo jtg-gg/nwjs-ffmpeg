@@ -9,12 +9,12 @@ import("../ffmpeg_options.gni")
 # Declare empty versions of each variable for easier +=ing later.
 x264_c_sources = []
 x264_encoder_c_sources = []
-x264_yasm_sources = []
+x264_nasm_sources = []
 
     x264_source_dir = "x264_src"
 
       if (ffmpeg_arch == "ia32" || ffmpeg_arch == "x64") {
-        x264_yasm_sources += [
+        x264_nasm_sources += [
           "x264_src/common/x86/bitstream-a.asm",
           "x264_src/common/x86/cabac-a.asm",
           "x264_src/common/x86/const-a.asm",
@@ -35,20 +35,20 @@ x264_yasm_sources = []
       }  # (ffmpeg_arch == "ia32" || ffmpeg_arch == "x64")
 
       if (ffmpeg_arch == "x64") {
-        x264_yasm_sources += [
+        x264_nasm_sources += [
           "x264_src/common/x86/dct-64.asm",
           "x264_src/common/x86/trellis-64.asm",
         ]
       } #ffmpeg_arch == "x64"
 
       if (ffmpeg_arch == "ia32") {
-        x264_yasm_sources += [
+        x264_nasm_sources += [
           "x264_src/common/x86/dct-32.asm",
           "x264_src/common/x86/pixel-32.asm",
         ]
       } #ffmpeg_arch == "ia32"
 
-      if (ffmpeg_arch == "arm") {
+      if (ffmpeg_arch == "arm" || ffmpeg_arch == "arm-neon") {
         x264_c_sources += [
           "x264_src/common/arm/mc-c.c",
           "x264_src/common/arm/predict-c.c",
@@ -61,7 +61,7 @@ x264_yasm_sources = []
           "x264_src/common/arm/predict-a.S",
           "x264_src/common/arm/bitstream-a.S",
         ]
-        x264_yasm_sources += [
+        x264_nasm_sources += [
         ]
       } #ffmpeg_arch == "arm"
 
