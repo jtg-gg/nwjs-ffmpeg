@@ -47,6 +47,10 @@
 // blocks of pixels (with respect to the luma plane)
 #define MB_SIZE 16
 
+#if defined(X264_BIT_DEPTH)
+#define x264_bit_depth X264_BIT_DEPTH
+#endif
+
 typedef struct X264Opaque {
     int64_t reordered_opaque;
     int64_t wallclock;
