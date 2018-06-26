@@ -40,6 +40,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined(X264_BIT_DEPTH)
+#define x264_bit_depth X264_BIT_DEPTH
+#endif
+
 typedef struct X264Context {
     AVClass        *class;
     x264_param_t    params;
