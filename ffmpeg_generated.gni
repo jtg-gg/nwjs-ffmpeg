@@ -99,6 +99,7 @@ if ((is_android && current_cpu == "arm" && arm_use_neon) || (is_android && curre
     "libavformat/autorename_libavformat_options.c",
     "libavformat/autorename_libavformat_pcm.c",
     "libavformat/autorename_libavformat_utils.c",
+    "libavformat/av1.c",
     "libavformat/avc.c",
     "libavformat/avio.c",
     "libavformat/aviobuf.c",
