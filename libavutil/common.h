@@ -299,7 +299,7 @@ static av_always_inline int av_sat_dsub32_c(int a, int b)
  * @return sum with signed saturation
  */
 static av_always_inline int64_t av_sat_add64_c(int64_t a, int64_t b) {
-#if (!defined(__INTEL_COMPILER) && AV_GCC_VERSION_AT_LEAST(5,1)) || (defined(__clang__) && __has_builtin(__builtin_add_overflow))
+#if (!defined(__INTEL_COMPILER) && AV_GCC_VERSION_AT_LEAST(5,1)) || AV_HAS_BUILTIN(__builtin_add_overflow)
     int64_t tmp;
     return !__builtin_add_overflow(a, b, &tmp) ? tmp : (tmp < 0 ? INT64_MAX : INT64_MIN);
 #else
@@ -319,7 +319,7 @@ static av_always_inline int64_t av_sat_add64_c(int64_t a, int64_t b) {
  * @return difference with signed saturation
  */
 static av_always_inline int64_t av_sat_sub64_c(int64_t a, int64_t b) {
-#if (!defined(__INTEL_COMPILER) && AV_GCC_VERSION_AT_LEAST(5,1)) || (defined(__clang__) && __has_builtin(__builtin_sub_overflow))
+#if (!defined(__INTEL_COMPILER) && AV_GCC_VERSION_AT_LEAST(5,1)) || AV_HAS_BUILTIN(__builtin_sub_overflow)
     int64_t tmp;
     return !__builtin_sub_overflow(a, b, &tmp) ? tmp : (tmp < 0 ? INT64_MAX : INT64_MIN);
 #else
