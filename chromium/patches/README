@@ -951,3 +951,15 @@ Date:   Thu May 14 14:57:08 2020 -0700
 Affects:
     libavformat/mov.c
 
+------------------------------------------------------------------
+commit e4e121c110b06d6d52fc75a2964e8c14657763ec
+Author: Dale Curtis <dalecurtis@chromium.org>
+Date:   Fri May 15 12:37:02 2020 -0700
+
+    [oggtheora] Don't update start time when lastpts is AV_NOPTS_VALUE.
+
+    Signed-off-by: Dale Curtis <dalecurtis@chromium.org>
+
+Affects:
+    libavformat/oggparsetheora.c
+
