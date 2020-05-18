@@ -963,3 +963,19 @@ Date:   Fri May 15 12:37:02 2020 -0700
 Affects:
     libavformat/oggparsetheora.c
 
+------------------------------------------------------------------
+commit 696586aaed6ba1ae588118953deb834d0182649c
+Author: Dale Curtis <dalecurtis@chromium.org>
+Date:   Mon May 18 15:35:35 2020 -0700
+
+    Free temp buffer upon negative sample_size error.
+
+    2d8d554f15a7a27cfeca81467cc9341a86f784e2 added a new error condition
+    to mov_read_stsz() but forgot to free a temporary buffer when it
+    occurs.
+
+    Signed-off-by: Dale Curtis <dalecurtis@chromium.org>
+
+Affects:
+    libavformat/mov.c
+
