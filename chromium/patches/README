@@ -874,6 +874,20 @@ Affects:
     libavutil/common.h
 
 ------------------------------------------------------------------
+commit d0cc093d860a1df9a176cb17487a7593e34759a3
+Author: Dale Curtis <dalecurtis@chromium.org>
+Date:   Fri May 1 10:20:43 2020 -0700
+
+    Use gcc/clang builtins for av_sat_(add|sub)_64_c if available.
+
+    Signed-off-by: Dale Curtis <dalecurtis@chromium.org>
+    Signed-off-by: Michael Niedermayer <michael@niedermayer.cc>
+
+Affects:
+    libavutil/attributes.h
+    libavutil/common.h
+
+------------------------------------------------------------------
 commit aee9f6ca755dcd26da25b415c640d117c895feb5
 Author: Dale Curtis <dalecurtis@chromium.org>
 Date:   Fri May 1 10:20:43 2020 -0700
