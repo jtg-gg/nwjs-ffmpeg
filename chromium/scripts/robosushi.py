@@ -19,6 +19,7 @@
 import getopt
 import os
 import sys
+from subprocess import check_output
 
 import robo_branch
 from robo_lib import log
@@ -177,6 +178,7 @@ def main(argv):
            "auto-merge",
            "step=",
            "list",
+           "dev-merge",
           ])
 
   for opt, arg in parsed:
@@ -218,6 +220,12 @@ def main(argv):
       RunSteps(robo_configuration, arg.split(","))
     elif opt == "--list":
       ListSteps()
+    elif opt == "--dev-merge":
+      # Use HEAD rather than origin/master, so that local robosushi changes
+      # are part of the merge.  Only useful for testing those changes.
+      new_merge_base = check_output(["git", "log", "--format=%H", "-1"]).strip()
+      log("Using %s as new origin merge base for testing" % new_merge_base)
+      robo_configuration.override_origin_merge_base(new_merge_base)
     else:
       raise Exception("Unknown option '%s'" % opt);
 
