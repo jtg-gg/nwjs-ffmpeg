@@ -167,7 +167,7 @@ def main(argv):
            "prompt",
            "setup",
            "test",
-           "build",
+           "build-gn",
            "patches",
            "auto-merge",
            "step=",
