@@ -325,10 +325,10 @@ def SetupMacCrossCompileToolchain(target_arch):
   # First compute the various SDK paths.
   mac_min_ver = '10.10'
   if target_arch == 'x64':
-    developer_dir =  os.path.join(CHROMIUM_ROOT_DIR, 'build', 'win_files',
-            'Xcode.app', 'Contents', 'Developer')
+    developer_dir =  os.path.join(CHROMIUM_ROOT_DIR, 'build', 'mac_files',
+            'xcode_binaries', 'Contents', 'Developer')
     sdk_dir = os.path.join(developer_dir, 'Platforms', 'MacOSX.platform',
-            'Developer', 'SDKs', 'MacOSX' + mac_min_ver + '.sdk')
+            'Developer', 'SDKs', 'MacOSX.sdk')
     target_triple = 'x86_64-apple-macosx'
   elif target_arch == 'arm64':
     # TODO: Once the 11.0 SDK is out of beta, it should be used for both
@@ -343,6 +343,7 @@ def SetupMacCrossCompileToolchain(target_arch):
 
   # We're guessing about the right sdk path, so warn if we don't find it.
   if not os.path.exists(sdk_dir):
+      print (sdk_dir)
       raise Exception("Can't find the mac sdk.  Please see crbug.com/841826")
 
   frameworks_dir = os.path.join(sdk_dir, "System", "Library", "Frameworks")

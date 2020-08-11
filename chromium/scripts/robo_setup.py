@@ -150,24 +150,21 @@ def FetchAdditionalWindowsBinaries(robo_configuration):
 
 
 def FetchMacSDKs(robo_configuration):
-  """Download the 10.10 MacOSX sdk."""
+  """Download the MacOSX SDKs."""
   log("Installing Mac OSX sdk")
   robo_configuration.chdir_to_chrome_src()
-  sdk_base = "build/win_files/Xcode.app"
-  if not os.path.exists(sdk_base):
-    os.makedirs(sdk_base)
-  os.chdir(sdk_base)
   if robo_configuration.Call(
-      "gsutil.py cat gs://chrome-mac-sdk/toolchain-8E2002-3.tgz | tar xzvf -",
+      "FORCE_MAC_TOOLCHAIN=1 build/mac_toolchain.py",
       shell=True):
-    raise Exception("Cannot download and extract Mac SDK")
+    raise Exception("Cannot download and extract Mac beta SDK")
 
   # TODO: Once the 11.0 SDK is out of beta, it should be used for both
   # arm64 and intel builds.
   log("Installing Mac OSX 11.0 beta sdk for arm64")
   robo_configuration.chdir_to_chrome_src()
   if robo_configuration.Call(
-      "build/mac_toolchain.py --xcode-version xcode_12_beta",
+      "FORCE_MAC_TOOLCHAIN=1 build/mac_toolchain.py "
+      "--xcode-version xcode_12_beta",
       shell=True):
     raise Exception("Cannot download and extract Mac beta SDK")
 

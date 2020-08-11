@@ -119,6 +119,11 @@ steps = {
       { "desc": "Try a test deps roll against the sushi (not master) branch",
         "do_fn": robo_branch.TryFakeDepsRoll },
 
+  # Some things you probably don't need unless you're debugging.
+  "download_mac_sdk":
+      { "desc": "Try to download the mac SDK, if needed.",
+        "do_fn": robo_setup.FetchMacSDKs },
+
   # Roll-up for --auto-merge
   "auto-merge":
       { "do_fn": lambda cfg : RunSteps(cfg, [ "create_sushi_branch",
