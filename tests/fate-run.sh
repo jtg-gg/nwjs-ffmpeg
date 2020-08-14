@@ -89,6 +89,10 @@ probefmt(){
     run ffprobe${PROGSUF}${EXECSUF} -show_entries format=format_name -print_format default=nw=1:nk=1 -v 0 "$@"
 }
 
+probeaudiostream(){
+    run ffprobe${PROGSUF}${EXECSUF} -show_entries stream=codec_name,codec_time_base,sample_fmt,channels,channel_layout -v 0 "$@"
+}
+
 probetags(){
     run ffprobe${PROGSUF}${EXECSUF} -show_entries format_tags -v 0 "$@"
 }
@@ -485,6 +489,13 @@ concat(){
     else
         run ffprobe${PROGSUF}${EXECSUF} -bitexact -show_streams -show_packets -v 0 -of compact=p=0:nk=1 -safe 0 $extra_args $(target_path $concatfile)
     fi
+}
+
+venc_data(){
+    file=$1
+    stream=$2
+    frames=$3
+    run tools/venc_data_dump${EXECSUF} ${file} ${stream} ${frames} ${threads} ${thread_type}
 }
 
 null(){
