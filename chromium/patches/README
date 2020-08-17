@@ -892,3 +892,16 @@ Date:   Fri Jul 10 14:23:02 2020 -0400
 Affects:
     libavutil/aarch64/asm.S
 
+------------------------------------------------------------------
+commit cc806c606a868fd0827f920d92cdc3e4fe9ae93c
+Author: Dan Sanders <sandersd@chromium.org>
+Date:   Mon Aug 17 15:50:42 2020 -0700
+
+    Always use av_realloc() to allocate ogg_stream |buf|.
+
+    av_realloc() does not work with av_malloc() when posix_memalign() is
+    available.
+
+Affects:
+    libavformat/oggdec.c
+

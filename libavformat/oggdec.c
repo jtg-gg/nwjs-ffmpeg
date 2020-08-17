@@ -104,7 +104,13 @@ static int ogg_save(AVFormatContext *s)
 
     for (i = 0; i < ogg->nstreams; i++) {
         struct ogg_stream *os = ogg->streams + i;
+// Chromium: always allocate |buf| using av_realloc().
+// av_mallocz() will use posix_memalign(), preventing reallocation.
+#if 0
         os->buf = av_mallocz(os->bufsize + AV_INPUT_BUFFER_PADDING_SIZE);
+#else
+        os->buf = av_realloc(NULL, os->bufsize + AV_INPUT_BUFFER_PADDING_SIZE);
+#endif
         if (os->buf)
             memcpy(os->buf, ost->streams[i].buf, os->bufpos);
         else
@@ -274,7 +280,13 @@ static int ogg_new_stream(AVFormatContext *s, uint32_t serial)
     memset(os, 0, sizeof(*os));
     os->serial        = serial;
     os->bufsize       = DECODER_BUFFER_SIZE;
+// Chromium: always allocate |buf| using av_realloc().
+// av_malloc() will use posix_memalign(), preventing reallocation.
+#if 0
     os->buf           = av_malloc(os->bufsize + AV_INPUT_BUFFER_PADDING_SIZE);
+#else
+    os->buf           = av_realloc(NULL, os->bufsize + AV_INPUT_BUFFER_PADDING_SIZE);
+#endif
     os->header        = -1;
     os->start_granule = OGG_NOGRANULE_VALUE;
     if (!os->buf)
