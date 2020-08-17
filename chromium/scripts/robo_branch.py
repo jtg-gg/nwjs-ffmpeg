@@ -153,7 +153,7 @@ def WriteConfigChangesFile(cfg):
   # This looks for things that were added / deleted that look like #define or
   # %define (for asm) ending in 0 or 1, that have changed in any of the configs.
   os.system("git diff %s --unified=0 -- chromium/config/* |"
-            "grep '^[+-].*[01]$' | sed -e 's/[%#]define//g' |sort |"
+            "grep '^[+-].*[01]$' | sed -e 's/[%%#]define//g' |sort |"
             "uniq -s 1 >chromium/patches/config_flag_changes.txt" %
             cfg.origin_merge_base())
 
