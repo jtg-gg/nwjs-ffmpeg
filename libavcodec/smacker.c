@@ -41,13 +41,6 @@
 #define SMKTREE_DECODE_MAX_RECURSION FFMIN(32, 3 * SMKTREE_BITS)
 #define SMKTREE_DECODE_BIG_MAX_RECURSION 500
 
-/* The maximum possible unchecked overread happens in decode_header_trees:
- * Decoding the MMAP tree can overread by 6 * SMKTREE_BITS + 1, followed by
- * three get_bits1, followed by at most 2 + 3 * 16 read bits when reading
- * the TYPE tree before the next check. 64 is because of 64 bit reads. */
-#if (6 * SMKTREE_BITS + 1 + 3 + (2 + 3 * 16) + 64) <= 8 * AV_INPUT_BUFFER_PADDING_SIZE
-#define UNCHECKED_BITSTREAM_READER 1
-#endif
 #define BITSTREAM_READER_LE
 #include "bytestream.h"
 #include "get_bits.h"
