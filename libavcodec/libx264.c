@@ -33,7 +33,7 @@
 #include "atsc_a53.h"
 
 #if defined(_MSC_VER)
-#define X264_API_IMPORTS 1
+//#define X264_API_IMPORTS 1
 #endif
 
 #include <x264.h>

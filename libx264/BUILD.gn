@@ -11,7 +11,7 @@ platform_config_root = "config/$os_config/$x264_arch"
 has_nasm_deps = x264_nasm_sources != [] && (current_cpu == "x86" || current_cpu == "x64") && os_config != "linux-noasm"
 if (has_nasm_deps) {
   import("//third_party/nasm/nasm_assemble.gni")
-  nasm_assemble("libx264_nasm") {
+  nasm_assemble("libx264_bitdepth8_nasm") {
     sources = x264_nasm_sources
 
     # Ensure the architecture defines go in the command line before the -P
@@ -28,6 +28,9 @@ if (has_nasm_deps) {
       "PIC",
       "HIGH_BIT_DEPTH=0",
       "BIT_DEPTH=8",
+      "HAVE_BITDEPTH8=1",
+      "HAVE_BITDEPTH10=0",
+      "private_prefix=x264_8",
     ]
 
     include_dirs = [
@@ -48,6 +51,47 @@ if (has_nasm_deps) {
       defines += [ "PREFIX" ]
     }
   }
+
+  nasm_assemble("libx264_nasm") {
+    sources = ["x264_src/common/x86/cpu-a.asm"]
+
+    # Ensure the architecture defines go in the command line before the -P
+    # file below, so don't use defines.
+    nasm_flags = []
+    defines = []
+    if (ffmpeg_arch == "ia32") {
+      nasm_flags += [ "-DARCH_X86_64=0" ]
+    } else if (ffmpeg_arch == "x64") {
+      nasm_flags += [ "-DARCH_X86_64=1" ]
+    }
+
+    defines += [
+      "PIC",
+      "HIGH_BIT_DEPTH=0",
+      "BIT_DEPTH=8",
+      "HAVE_BITDEPTH8=1",
+      "HAVE_BITDEPTH10=0",
+    ]
+
+    include_dirs = [
+      platform_config_root,
+      x264_source_dir,
+      "$x264_source_dir/common/x86/",
+      ".",
+    ]
+
+    # pre-includes config.asm based on platform config
+    nasm_flags += [
+      "-P", rebase_path("$platform_config_root/config.asm", root_build_dir),
+    ]
+
+    if (is_mac) {
+      # Necessary to ensure symbols end up with a _ prefix; added by
+      # nasm_compile.gypi for Windows, but not Mac.
+      defines += [ "PREFIX" ]
+    }
+  }
+
 }
 
 config("libx264_config") {
@@ -58,6 +102,13 @@ config("libx264_config") {
       ".",
   ]
   cflags = []
+
+  defines = [
+    "BIT_DEPTH=8",
+    "HAVE_BITDEPTH8=1",
+    "HAVE_BITDEPTH10=0",
+  ]
+
   if (!is_win) {
     cflags += [
       "-fPIC",
@@ -100,7 +151,7 @@ static_library("libx264") {
   ]
 
   if (has_nasm_deps) {
-    deps = [ ":libx264_nasm" ]
+    deps = [ ":libx264_bitdepth8_nasm", ":libx264_nasm" ]
   }
 
   sources = x264_c_sources + [

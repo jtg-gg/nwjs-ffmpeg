@@ -18,7 +18,6 @@ x264_nasm_sources = []
           "x264_src/common/x86/bitstream-a.asm",
           "x264_src/common/x86/cabac-a.asm",
           "x264_src/common/x86/const-a.asm",
-          "x264_src/common/x86/cpu-a.asm",
           "x264_src/common/x86/dct-a.asm",
           "x264_src/common/x86/deblock-a.asm",
           "x264_src/common/x86/mc-a.asm",
@@ -72,6 +71,7 @@ x264_nasm_sources = []
       } #is_win
 
     x264_c_sources += [
+      "x264_src/common/base.c",
       "x264_src/common/bitstream.c",
       "x264_src/common/cabac.c",
       "x264_src/common/common.c",
@@ -88,12 +88,14 @@ x264_nasm_sources = []
       "x264_src/common/quant.c",
       "x264_src/common/rectangle.c",
       "x264_src/common/set.c",
+      "x264_src/common/tables.c",
       "x264_src/common/threadpool.c",
       "x264_src/common/vlc.c",
     ]  # x264_c_sources
 
     x264_encoder_c_sources += [
       "x264_src/encoder/analyse.c",
+      "x264_src/encoder/api.c",
       "autorename_encoder_cabac.c",
       "x264_src/encoder/cavlc.c",
       "x264_src/encoder/encoder.c",

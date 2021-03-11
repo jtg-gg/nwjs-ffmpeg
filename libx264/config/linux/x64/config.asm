@@ -32,3 +32,4 @@
 %define HAVE_AS_FUNC 0
 %define HAVE_INTEL_DISPATCHER 0
 %define HAVE_MSA 0
+%define HAVE_STRTOK_R 1
