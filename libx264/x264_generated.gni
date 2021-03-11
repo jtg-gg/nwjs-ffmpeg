@@ -63,6 +63,23 @@ x264_nasm_sources = []
         x264_nasm_sources += [
         ]
       } #ffmpeg_arch == "arm"
+      
+      if (ffmpeg_arch == "arm64") {
+        x264_c_sources += [
+          "x264_src/common/aarch64/mc-c.c",
+          "x264_src/common/aarch64/predict-c.c",
+          "x264_src/common/aarch64/pixel-a.S",
+          "x264_src/common/aarch64/mc-a.S",
+          "x264_src/common/aarch64/dct-a.S",
+          "x264_src/common/aarch64/quant-a.S",
+          "x264_src/common/aarch64/deblock-a.S",
+          "x264_src/common/aarch64/predict-a.S",
+          "x264_src/common/aarch64/bitstream-a.S",
+          "x264_src/common/aarch64/cabac-a.S",
+        ]
+        x264_nasm_sources += [
+        ]
+      } #ffmpeg_arch == "arm"
 
       if (is_win) {
         x264_c_sources += [

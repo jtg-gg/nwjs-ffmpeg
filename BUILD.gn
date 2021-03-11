@@ -304,15 +304,11 @@ target(link_target_type, "ffmpeg_internal") {
     }
 
     if (current_cpu == "arm" || current_cpu == "arm64") {
-      configs -= [ "//build/config/compiler:assembler_debug_dir" ]
       asmflags = []
       if (arm_float_abi == "hard") {
         asmflags += [ "-DHAVE_VFP_ARGS=1" ]
       } else {
         asmflags += [ "-DHAVE_VFP_ARGS=0" ]
-      }
-      if (is_clang) {
-        asmflags += [ "-fno-integrated-as" ]
       }
     }
   }

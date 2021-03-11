@@ -119,8 +119,9 @@ config("libx264_config") {
     if (current_cpu == "arm" || current_cpu == "arm64") {
       asmflags = []
       if (is_clang) {
-        asmflags += [ "-fno-integrated-as", "-DPIC" ]
+        asmflags += [ "-DPIC" ]
       }
+      defines += [ "PREFIX" ]
     }
   } else {
     cflags += [
@@ -143,9 +144,6 @@ static_library("libx264_encoder") {
 
 static_library("libx264") {
   configs -= [ "//build/config/compiler:chromium_code" ]
-  if (current_cpu == "arm" || current_cpu == "arm64") {
-    configs -= [ "//build/config/compiler:assembler_debug_dir" ]
-  }
   public_deps = [
     ":libx264_encoder",
   ]

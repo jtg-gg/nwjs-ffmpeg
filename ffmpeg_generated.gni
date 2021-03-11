@@ -572,12 +572,23 @@ if ((is_mac && current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (is_win
     "libavcodec/aarch64/h264chroma_init_aarch64.c",
     "libavcodec/aarch64/h264dsp_init_aarch64.c",
     "libavcodec/aarch64/h264qpel_init_aarch64.c",
+    "libswresample/aarch64/audio_convert_init.c",
+    "libswresample/aarch64/resample_init.c",
+    "libswscale/aarch64/autorename_libswscale_aarch64_swscale.c",
+    "libswscale/aarch64/autorename_libswscale_aarch64_swscale_unscaled.c",
+    "libswscale/aarch64/autorename_libswscale_aarch64_rgb2rgb.c",
   ]
   ffmpeg_gas_sources += [
     "libavcodec/aarch64/autorename_libavcodec_aarch64_h264cmc_neon.S",
     "libavcodec/aarch64/autorename_libavcodec_aarch64_h264dsp_neon.S",
     "libavcodec/aarch64/autorename_libavcodec_aarch64_h264idct_neon.S",
     "libavcodec/aarch64/autorename_libavcodec_aarch64_h264qpel_neon.S",
+    "libswresample/aarch64/audio_convert_neon.S",
+    "libswresample/aarch64/autorename_libswresample_aarch64_resample.S",
+    "libswscale/aarch64/autorename_libswscale_aarch64_hscale.S",
+    "libswscale/aarch64/autorename_libswscale_aarch64_output.S",
+    "libswscale/aarch64/rgb2rgb_neon.S",
+    "libswscale/aarch64/yuv2rgb_neon.S",
   ]
 }
 
